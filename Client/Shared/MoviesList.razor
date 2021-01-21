@@ -1,0 +1,30 @@
+﻿@if (movies is null)
+{
+    <p>Loading...</p>
+}
+else if (movies.Count == 0)
+{
+    <p>There are no records to show</p>
+}
+else
+{
+    foreach (var movie in movies)
+    {
+        <p>Title: @movie.Title</p>
+        <p>Release Date: <b>@movie.ReleaseDate.ToShortDateString()</b></p>
+    }
+}
+
+@code {
+    List<Movie> movies;
+
+    protected override void OnInitialized()
+    {
+        movies = new List<Movie>()
+        {
+            new Movie(){Title = "Spider-Man: Far From Home", ReleaseDate = new DateTime(2020, 1, 2)},
+            new Movie(){Title = "Moana", ReleaseDate = new DateTime(2016, 3, 9)},
+            new Movie(){Title = "Inception", ReleaseDate = new DateTime(2010, 7, 16)},
+        };
+    }
+}
