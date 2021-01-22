@@ -1,30 +1,18 @@
-﻿@if (movies is null)
-{
-    <p>Loading...</p>
-}
-else if (movies.Count == 0)
-{
-    <p>There are no records to show</p>
-}
-else
-{
-    foreach (var movie in movies)
-    {
-        <p>Title: @movie.Title</p>
-        <p>Release Date: <b>@movie.ReleaseDate.ToShortDateString()</b></p>
-    }
-}
+﻿<input type="checkbox" @bind="displayButtons" />
+
+<GenericList List="Movies">
+    <ElementTemplate>
+        <IndividualMovie Movie="context" DisplayButtons="displayButtons" DeleteMovie="DeleteMovie" />
+    </ElementTemplate>
+</GenericList>
 
 @code {
-    List<Movie> movies;
+    [Parameter] public List<Movie> Movies { get; set; }
+    
+    bool displayButtons = false;
 
-    protected override void OnInitialized()
+    void DeleteMovie(Movie movie)
     {
-        movies = new List<Movie>()
-        {
-            new Movie(){Title = "Spider-Man: Far From Home", ReleaseDate = new DateTime(2020, 1, 2)},
-            new Movie(){Title = "Moana", ReleaseDate = new DateTime(2016, 3, 9)},
-            new Movie(){Title = "Inception", ReleaseDate = new DateTime(2010, 7, 16)},
-        };
+        Movies.Remove(movie);
     }
 }
