@@ -8,11 +8,31 @@
 
 @code {
     [Parameter] public List<Movie> Movies { get; set; }
-    
+
     bool displayButtons = false;
 
     void DeleteMovie(Movie movie)
     {
         Movies.Remove(movie);
+    }
+
+    protected override void OnInitialized()
+    {
+        Console.WriteLine($"OnInitialized. Movies.Count = {Movies.Count().ToString()}");
+    }
+
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine($"OnParametersSet. Movies.Count = {Movies.Count().ToString()}");
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Console.WriteLine($"OnInitialized. First Render = {firstRender.ToString()}");
+    }
+
+    protected override bool ShouldRender()
+    {
+        return true;
     }
 }
