@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using BlazorMovies.Client.Helpers;
 
 namespace BlazorMovies.Client
 {
@@ -28,6 +29,7 @@ namespace BlazorMovies.Client
         {
             services.AddSingleton<SingletonService>();
             services.AddTransient<TransientService>();
+            services.AddTransient<IRepository, RepositoryInMemory>();
         }
     }
 }
